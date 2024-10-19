@@ -1,30 +1,12 @@
 from datetime import date
 
-from gazette.items import Gazette
-from gazette.spiders.base import BaseGazetteSpider
+from gazette.spiders.base.barcodigital import BaseBarcoDigitalSpider
 
 
-class UFMunicipioSpider(BaseGazetteSpider):
+class ToTupiramaSpider(BaseBarcoDigitalSpider):
     name = "to_tupirama"
-    TERRITORY_ID = ""
-    allowed_domains = ["www.tupirama.to.gov.br"]
-    start_urls = ["https://www.tupirama.to.gov.br/diariooficial"]
-    start_date = date()
+    TERRITORY_ID = "1721257"
+    allowed_domains = ["api-tupirama.barcodigital.com.br"]
+    base_url = "https://api-tupirama.barcodigital.com.br"
 
-    def parse(self, response):
-        # Lógica de extração de metadados
-
-        # partindo de response ...
-        #
-        # ... o que deve ser feito para coletar DATA DO DIÁRIO?
-        # ... o que deve ser feito para coletar NÚMERO DA EDIÇÃO?
-        # ... o que deve ser feito para coletar se a EDIÇÃO É EXTRA?
-        # ... o que deve ser feito para coletar a URL DE DOWNLOAD do arquivo?
-
-        yield Gazette(
-            date=date(),
-            edition_number="",
-            is_extra_edition=False,
-            file_urls=[""],
-            power="executive",
-        )
+    start_date = date(year=2017, month=1, day=1)  # First gazette available
